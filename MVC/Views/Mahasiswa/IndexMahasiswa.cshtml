@@ -1,0 +1,150 @@
+﻿@model MVC.Models.ViewModels.MahasiswaViewModel
+
+@{
+    ViewData["Title"] = "Dashboard Mahasiswa";
+}
+
+<h2>Dashboard Mahasiswa</h2>
+
+<p>
+    <a class="text-right btn btn-primary" asp-controller="Mahasiswa" asp-action="Create">Create New Mahasiswa</a>
+    <!-- Button trigger modal -->
+            <button type="button" class="text-right btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Create New Mahasiswa
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <h1>Create</h1>
+
+                    <h4>MahasiswaModel</h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form asp-controller="Mahasiswa" asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                               @* <div class="form-group">
+                                    <label asp-for="ID" class="control-label"></label>
+                                    <input asp-for="ID" class="form-control" />
+                                    <span asp-validation-for="ID" class="text-danger"></span>
+                                </div>*@
+                                <div class="form-group">
+                                    <label asp-for="Mahasiswa.Npm" class="control-label"></label>
+                                    <input asp-for="Mahasiswa.Npm" class="form-control" />
+                                    <span asp-validation-for="Mahasiswa.Npm" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Mahasiswa.NamaMahasiswa" class="control-label"></label>
+                                    <input asp-for="Mahasiswa.NamaMahasiswa" class="form-control" />
+                                    <span asp-validation-for="Mahasiswa.NamaMahasiswa" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Mahasiswa.Email" class="control-label"></label>
+                                    <input asp-for="Mahasiswa.Email" class="form-control" />
+                                    <span asp-validation-for="Mahasiswa.Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Mahasiswa.Alamat" class="control-label"></label>
+                                    <input asp-for="Mahasiswa.Alamat" class="form-control" />
+                                    <span asp-validation-for="Mahasiswa.Alamat" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Mahasiswa.JenisKelamin" class="control-label"></label>
+                                    <input asp-for="Mahasiswa.JenisKelamin" class="form-control" />
+                                    <span asp-validation-for="Mahasiswa.JenisKelamin" class="text-danger"></span>
+                                </div>
+                                <div class="form-group form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" asp-for="Mahasiswa.IsActive" /> @Html.DisplayNameFor(model => model.Mahasiswa.IsActive)
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <a class="btn btn-secondary" asp-controller="Mahasiswa" asp-action="IndexMahasiswa">Back to Dashboard</a>
+                    </div>
+
+                    @section Scripts {
+                        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                    }
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+</p>
+<table class="table">
+    <thead class="text-center">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Mahasiswa.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mahasiswa.Npm)
+            </th>
+            <th>
+                Nama Mahasiswa
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mahasiswa.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mahasiswa.Alamat)
+            </th>
+            <th>
+                Jenis Kelamin
+            </th>
+            <th>
+                Is Active
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (MahasiswaModel item in Model.ListMahasiswa) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Npm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamaMahasiswa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alamat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JenisKelamin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID  }, new { @Class = "btn btn-warning" }) 
+                @Html.ActionLink("Details", "Details", new {  id = item.ID  }, new { @Class = "btn btn-success" }) 
+                @Html.ActionLink("Delete", "Delete", new {  id = item.ID  }, new { @Class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
